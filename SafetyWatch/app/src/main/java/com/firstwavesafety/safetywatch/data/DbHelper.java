@@ -3,7 +3,9 @@ package com.firstwavesafety.safetywatch.data;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
 import com.firstwavesafety.safetywatch.data.Contract.JobEntry;
+import com.firstwavesafety.safetywatch.data.Contract.WorkerEntry;
 
 public class DbHelper extends SQLiteOpenHelper{
 
@@ -21,8 +23,15 @@ public class DbHelper extends SQLiteOpenHelper{
                 + JobEntry.COLUMN_JOB_NAME + " TEXT NOT NULL, "
                 + JobEntry.COLUMN_JOB_LOCATION + " TEXT NOT NULL, "
                 + JobEntry.COLUMN_WORK_TYPE + " INTEGER NOT NULL, "
-                + JobEntry.COLUMN_PREMIT_NUMBER + " INTEGER NOT NULL);";
+                + JobEntry.COLUMN_PREMIT_NUMBER + " INTEGER );";
         db.execSQL(SQL_CREATE_JOB_TABLE);
+
+        String SQL_CREATE_WORKERS_TABLE = "CREATE TABLE " + WorkerEntry.TABLE_NAME + " ("
+                + WorkerEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + WorkerEntry.COLUMN_NAME + " TEXT NOT NULL, "
+                + WorkerEntry.COLUMN_QUALIFICATIONS + " TEXT, "
+                + WorkerEntry.COLUMN_EXPERIENCE + " INTEGER DEFAULT 0);";
+        db.execSQL(SQL_CREATE_WORKERS_TABLE);
     }
 
     @Override
